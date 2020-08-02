@@ -29,6 +29,7 @@ composition:
     - volunteer
     - languages
     - soft-skills
+    - interests
     - awards
 
 strings:
@@ -38,3 +39,5 @@ strings:
   education: Education
   volunteer: Volunteer
   language: Languages
+  soft-skills: Soft Skills
+  interests: Interests

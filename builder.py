@@ -275,6 +275,26 @@ def language():
     result.append("\n\\medskip\n")
 
 
+def soft_skills():
+    result.append(f"\\cvsection{{{configs.strings['soft-skills']}}}")
+
+    result.append("\\begin{itemize}")
+
+    for skill in configs.resume['other_skills']:
+        result.append(f"\\item {{{skill['name']}}}")
+
+    result.append("\\end{itemize}")
+
+    result.append("\n\\medskip\n")
+
+
+def interests():
+    """\cvsection{Interests}
+
+\cvtag{Automation}
+\cvtag{Game Development}"""
+
+
 def builder():
     start_doc()
     build_header()
@@ -295,7 +315,9 @@ def builder():
         elif section == "languages":
             language()
         elif section == "soft-skills":
-            pass
+            soft_skills()
+        elif section == "interests":
+            interests()
         elif section == "awards":
             pass
 
@@ -316,6 +338,8 @@ def builder():
             volunteer()
         elif section == "languages":
             language()
+        elif section == "soft-skills":
+            soft_skills()
 
     end()
 

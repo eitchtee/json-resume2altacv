@@ -231,6 +231,38 @@ def education():
     result.append("\n\\medskip\n")
 
 
+def volunteer():
+    result.append(f"\\cvsection{{{configs.strings['volunteer']}}}")
+
+    for index, job in enumerate(configs.resume['volunteer']):
+        start_date = parse_date(job['startDate'])
+        start_date = start_date.strftime("%B %Y").title() if start_date else \
+            job['startDate']
+
+        end_date = parse_date(job['endDate'])
+        end_date = end_date.strftime("%B %Y").title() if end_date else job[
+            'endDate']
+
+        if job.get('website', False):
+            result.append(
+                f"\\cvevent{{\\href{{{job['website']}}}"
+                f"{{{job['position']}}}}}"
+                f"{{{job['organization']}}}{{"
+                f"{start_date + ' -- ' + end_date}}}{{}}")
+        else:
+            result.append(
+                f"\\cvevent{{{job['position']}}}"
+                f"{{{job['organization']}}}{{"
+                f"{start_date + ' -- ' + end_date}}}{{}}")
+
+        result.append(replace_html(job['summary']))
+
+        if index < len(configs.resume['volunteer']) - 1:
+            result.append('\n\\divider\n')
+
+    result.append("\n\\medskip\n")
+
+
 def builder():
     start_doc()
     build_header()
@@ -247,7 +279,7 @@ def builder():
         elif section == "education":
             education()
         elif section == "volunteer":
-            pass
+            volunteer()
         elif section == "languages":
             pass
         elif section == "soft-skills":
@@ -268,6 +300,8 @@ def builder():
             certificates()
         elif section == "education":
             education()
+        elif section == "volunteer":
+            volunteer()
 
     end()
 

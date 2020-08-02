@@ -167,6 +167,21 @@ def work():
         if index < len(configs.resume['work']) - 1:
             result.append('\n\\divider\n')
 
+    result.append("\\medskip")
+
+
+def technical_skills():
+    result.append(f"\\cvsection{{{configs.strings['technical-skills']}}}")
+
+    result.append("\\begin{itemize}")
+
+    for skill in configs.resume['skills']:
+        result.append('\\item ' + "\\textbf{" + skill['name'] + ":} " + ', '.join([x[0] for x in skill['keywords']]))
+
+    result.append("\\end{itemize}")
+
+    result.append("\n\\medskip\n")
+
 
 def builder():
     start_doc()
@@ -178,7 +193,7 @@ def builder():
         elif section == "work":
             work()
         elif section == "technical-skills":
-            pass
+            technical_skills()
         elif section == "certificates":
             pass
         elif section == "education":

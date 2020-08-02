@@ -159,7 +159,7 @@ def work():
         end_date = parse_date(work['endDate'])
         end_date = end_date.strftime("%B %Y").title() if end_date else work['endDate']
 
-        result.append(f"\\cvevent{{{work['position']}}}{{{work['company']}}}{{{start_date + ' -- ' + end_date}}}{{}}")
+        result.append(f"\\cvevent{{{work['position']}}}{{{work['company']}}}{{{start_date + ' -- ' + end_date}}}{{{work['location']}}}")
         result.append(replace_html(work["summary"])) if work['summary'] else None
 
         if work['highlights']:
@@ -248,12 +248,14 @@ def volunteer():
                 f"\\cvevent{{\\href{{{job['website']}}}"
                 f"{{{job['position']}}}}}"
                 f"{{{job['organization']}}}{{"
-                f"{start_date + ' -- ' + end_date}}}{{}}")
+                f"{start_date + ' -- ' + end_date}}}"
+                f"{{{job['location']}}}")
         else:
             result.append(
                 f"\\cvevent{{{job['position']}}}"
                 f"{{{job['organization']}}}{{"
-                f"{start_date + ' -- ' + end_date}}}{{}}")
+                f"{start_date + ' -- ' + end_date}}}"
+                f"{{{job['location']}}}")
 
         result.append(replace_html(job['summary']))
 

@@ -380,4 +380,6 @@ if __name__ == '__main__':
     result = []
 
     builder()
-    print('\n'.join(result))
+    with open('result.txt', 'w', encoding='utf-8') as f:
+        f.write('\n'.join(result))
+

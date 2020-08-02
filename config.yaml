@@ -1,6 +1,10 @@
 # path to your resume.json
 json_resume_path: "resume.json"
 
+# pt or en
+# leave empty to use system
+language: "en"
+
 # override for the header
 # leave empty if you want to use the one on your resume.json
 name: ""
@@ -8,15 +12,17 @@ name: ""
 colors:
   name: "000000"
   heading: "0e6d24"
+  tagline: "000000"
   headingrule: "0e6d24"
   accent: "21BA45"
   emphasis: "000000"
-  body: "19de47"
+  body: "666666"
 
 composition:
   first-column:
     - work
     - technical-skills
+    - new-page
     - certificates
   second-column:
     - education
@@ -24,3 +30,6 @@ composition:
     - languages
     - soft-skills
     - awards
+
+strings:
+  work: Work Experience

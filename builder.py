@@ -199,6 +199,34 @@ def certificates():
     result.append("\n\\medskip\n")
 
 
+def education():
+    result.append(f"\\cvsection{{{configs.strings['education']}}}")
+
+    for index, school in enumerate(configs.resume['education']):
+        start_date = parse_date(school['startDate'])
+        start_date = start_date.strftime("%B %Y").title() if start_date else \
+        school['startDate']
+
+        end_date = parse_date(school['endDate'])
+        end_date = end_date.strftime("%B %Y").title() if end_date else school[
+            'endDate']
+
+        if school.get('website', False):
+            result.append(
+                f"\\cvevent{{\\href{{{school['website']}}}{{{school['area'] + ', ' + school['studyType']}}}}}"
+                f"{{{school['institution']}}}{{"
+                f"{start_date + ' -- ' + end_date}}}{{}}")
+        else:
+            result.append(
+                f"\\cvevent{{{school['area'] + ', ' + school['studyType']}}}{{{school['institution']}}}{{"
+                f"{start_date + ' -- ' + end_date}}}{{}}")
+
+        if index < len(configs.resume['education']) - 1:
+            result.append('\n\\divider\n')
+
+    result.append("\n\\medskip\n")
+
+
 def builder():
     start_doc()
     build_header()
@@ -213,7 +241,7 @@ def builder():
         elif section == "certificates":
             certificates()
         elif section == "education":
-            pass
+            education()
         elif section == "volunteer":
             pass
         elif section == "languages":
@@ -226,7 +254,16 @@ def builder():
     switch()
 
     for section in configs.right_composition:
-        pass
+        if section == "new-page":
+            new_page()
+        elif section == "work":
+            work()
+        elif section == "technical-skills":
+            technical_skills()
+        elif section == "certificates":
+            certificates()
+        elif section == "education":
+            education()
 
 
 if __name__ == '__main__':

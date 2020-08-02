@@ -183,6 +183,22 @@ def technical_skills():
     result.append("\n\\medskip\n")
 
 
+def certificates():
+    result.append(f"\\cvsection{{{configs.strings['certificates']}}}")
+
+    for index, certificate in enumerate(configs.resume['certificates']):
+        if certificate.get('url', False):
+            result.append(f"\\cvevent{{\\href{{{certificate['url']}}}{{{certificate['title']}}}}}{{{certificate['issuer']}}}{{{certificate['date']}}}{{}}")
+        else:
+            result.append(f"\\cvevent{{{certificate['title']}}}{{{certificate['issuer']}}}{{{certificate['date']}}}{{}}")
+        result.append(replace_html(certificate['summary']))
+
+        if index < len(configs.resume['certificates']) - 1:
+            result.append('\n\\divider\n')
+
+    result.append("\n\\medskip\n")
+
+
 def builder():
     start_doc()
     build_header()
@@ -195,7 +211,7 @@ def builder():
         elif section == "technical-skills":
             technical_skills()
         elif section == "certificates":
-            pass
+            certificates()
         elif section == "education":
             pass
         elif section == "volunteer":

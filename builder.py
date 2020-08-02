@@ -236,11 +236,11 @@ def volunteer():
 
     for index, job in enumerate(configs.resume['volunteer']):
         start_date = parse_date(job['startDate'])
-        start_date = start_date.strftime("%B %Y").title() if start_date else \
+        start_date = start_date.strftime("%Y").title() if start_date else \
             job['startDate']
 
         end_date = parse_date(job['endDate'])
-        end_date = end_date.strftime("%B %Y").title() if end_date else job[
+        end_date = end_date.strftime("%Y").title() if end_date else job[
             'endDate']
 
         if job.get('website', False):

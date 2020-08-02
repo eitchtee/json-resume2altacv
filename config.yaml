@@ -1,0 +1,26 @@
+# path to your resume.json
+json_resume_path: "resume.json"
+
+# override for the header
+# leave empty if you want to use the one on your resume.json
+name: ""
+
+colors:
+  name: "000000"
+  heading: "0e6d24"
+  headingrule: "0e6d24"
+  accent: "21BA45"
+  emphasis: "000000"
+  body: "19de47"
+
+composition:
+  first-column:
+    - work
+    - technical-skills
+    - certificates
+  second-column:
+    - education
+    - volunteer
+    - languages
+    - soft-skills
+    - awards

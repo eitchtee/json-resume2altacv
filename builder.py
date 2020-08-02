@@ -289,10 +289,24 @@ def soft_skills():
 
 
 def interests():
-    """\cvsection{Interests}
+    result.append(f"\\cvsection{{{configs.strings['interests']}}}")
 
-\cvtag{Automation}
-\cvtag{Game Development}"""
+    for interest in configs.resume['interests']:
+        result.append(f"\\cvtag {{{interest['name'].title()}}}\\")
+
+    result.append("\n\\medskip\n")
+
+
+def awards():
+    result.append(f"\\cvsection{{{configs.strings['awards']}}}")
+
+    for index, lang in enumerate(configs.resume['awards']):
+        result.append(f"\\cvskill{{{lang['name']}}}{{{lang['level'] + 1 if lang['level'] > 1 else lang['level']}}}")
+
+        if index < len(configs.resume['languages']) - 1:
+            result.append('\n\\divider\n')
+
+    result.append("\n\\medskip\n")
 
 
 def builder():
@@ -319,7 +333,7 @@ def builder():
         elif section == "interests":
             interests()
         elif section == "awards":
-            pass
+            awards()
 
     switch()
 
@@ -340,6 +354,8 @@ def builder():
             language()
         elif section == "soft-skills":
             soft_skills()
+        elif section == "interests":
+            interests()
 
     end()
 

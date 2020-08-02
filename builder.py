@@ -263,6 +263,18 @@ def volunteer():
     result.append("\n\\medskip\n")
 
 
+def language():
+    result.append(f"\\cvsection{{{configs.strings['language']}}}")
+
+    for index, lang in enumerate(configs.resume['languages']):
+        result.append(f"\\cvskill{{{lang['name']}}}{{{lang['level'] + 1 if lang['level'] > 1 else lang['level']}}}")
+
+        if index < len(configs.resume['languages']) - 1:
+            result.append('\n\\divider\n')
+
+    result.append("\n\\medskip\n")
+
+
 def builder():
     start_doc()
     build_header()
@@ -281,7 +293,7 @@ def builder():
         elif section == "volunteer":
             volunteer()
         elif section == "languages":
-            pass
+            language()
         elif section == "soft-skills":
             pass
         elif section == "awards":
@@ -302,6 +314,8 @@ def builder():
             education()
         elif section == "volunteer":
             volunteer()
+        elif section == "languages":
+            language()
 
     end()
 

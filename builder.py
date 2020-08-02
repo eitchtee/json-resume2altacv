@@ -145,6 +145,10 @@ def switch():
     result.append("\n\\switchcolumn\n")
 
 
+def end():
+    result.append("\n\\end{paracol}\n\\end{document}\n")
+
+
 def work():
     result.append(f"\\cvsection{{{configs.strings['work']}}}")
 
@@ -264,6 +268,8 @@ def builder():
             certificates()
         elif section == "education":
             education()
+
+    end()
 
 
 if __name__ == '__main__':

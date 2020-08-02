@@ -30,6 +30,7 @@ composition:
     - languages
     - soft-skills
     - interests
+    - new-page
     - awards
 
 strings:
@@ -41,3 +42,4 @@ strings:
   language: Languages
   soft-skills: Soft Skills
   interests: Interests
+  awards: Achievements

@@ -292,7 +292,7 @@ def interests():
     result.append(f"\\cvsection{{{configs.strings['interests']}}}")
 
     for interest in configs.resume['interests']:
-        result.append(f"\\cvtag {{{interest['name'].title()}}}\\")
+        result.append(f"\\cvtag {{{interest['name'].title()}}}")
 
     result.append("\n\\medskip\n")
 
@@ -300,10 +300,15 @@ def interests():
 def awards():
     result.append(f"\\cvsection{{{configs.strings['awards']}}}")
 
-    for index, lang in enumerate(configs.resume['awards']):
-        result.append(f"\\cvskill{{{lang['name']}}}{{{lang['level'] + 1 if lang['level'] > 1 else lang['level']}}}")
+    for index, award in enumerate(configs.resume['awards']):
+        result.append(
+            f"\\cvevent{{{award['title']}}}"
+            f"{{{award['awarder']}}}{{"
+            f"{award['date']}}}{{}}")
 
-        if index < len(configs.resume['languages']) - 1:
+        result.append(replace_html(award['summary']))
+
+        if index < len(configs.resume['awards']) - 1:
             result.append('\n\\divider\n')
 
     result.append("\n\\medskip\n")
@@ -356,6 +361,8 @@ def builder():
             soft_skills()
         elif section == "interests":
             interests()
+        elif section == "awards":
+            awards()
 
     end()
 

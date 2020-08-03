@@ -9,8 +9,8 @@ class Configs:
     def __init__(self, path):
         self.config_path = path
 
-        with open(path) as f:
-            data = yaml.load(f, Loader=yaml.FullLoader)
+        with open(path, encoding='utf8') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
 
         self.json_resume_path = data["json_resume_path"]
         self.colors = data["colors"]
@@ -25,14 +25,14 @@ class Configs:
         self.resume = self.load_json()
 
     def load_json(self):
-        with open(self.json_resume_path, encoding="utf-8") as f:
-            return json.load(f)
+        with open(self.json_resume_path, encoding="utf-8") as file:
+            return json.load(file)
 
     def change_lang(self):
         if self.language == 'en':
             locale.setlocale(locale.LC_TIME, 'en_US.UTF-8')
         elif self.language == 'pt':
-            locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
+            locale.setlocale(locale.LC_TIME, 'pt_BR')
         else:
             locale.setlocale(locale.LC_TIME, '')
 
@@ -121,7 +121,9 @@ def build_header():
                   "[https://stackoverflow.com/users/3042266/]")
     result.append("  \\NewInfoField{instagram}{\\faInstagram}"
                   "[https://www.instagram.com/]")
-    result.append(f"  \\homepage{{{configs.resume['basics']['website'].replace('https://', '')}}}")
+    result.append(
+        f"  \\homepage{{"
+        f"{configs.resume['basics']['website'].replace('https://', '')}}}")
 
     for profile in configs.resume['basics']['profiles']:
         result.append(f"  \\{profile['network'].replace(' ', '')}"
@@ -154,13 +156,18 @@ def work():
 
     for index, work in enumerate(configs.resume['work']):
         start_date = parse_date(work['startDate'])
-        start_date = start_date.strftime("%B %Y").title() if start_date else work['startDate']
+        start_date = start_date.strftime("%B %Y").title() if start_date else \
+            work['startDate']
 
         end_date = parse_date(work['endDate'])
-        end_date = end_date.strftime("%B %Y").title() if end_date else work['endDate']
+        end_date = end_date.strftime("%B %Y").title() if end_date else work[
+            'endDate']
 
-        result.append(f"\\cvevent{{{work['position']}}}{{{work['company']}}}{{{start_date + ' -- ' + end_date}}}{{{work['location']}}}")
-        result.append(replace_html(work["summary"])) if work['summary'] else None
+        result.append(
+            f"\\cvevent{{{work['position']}}}{{{work['company']}}}{{"
+            f"{start_date + ' -- ' + end_date}}}{{{work['location']}}}")
+        result.append(replace_html(work["summary"])) if work[
+            'summary'] else None
 
         if work['highlights']:
             result.append("\\begin{itemize}")
@@ -180,7 +187,9 @@ def technical_skills():
     result.append("\\begin{itemize}")
 
     for skill in configs.resume['skills']:
-        result.append('\\item ' + "\\textbf{" + skill['name'] + ":} " + ', '.join([x[0] for x in skill['keywords']]))
+        result.append(
+            '\\item ' + "\\textbf{" + skill['name'] + ":} " + ', '.join(
+                [x[0] for x in skill['keywords']]))
 
     result.append("\\end{itemize}")
 
@@ -192,9 +201,14 @@ def certificates():
 
     for index, certificate in enumerate(configs.resume['certificates']):
         if certificate.get('url', False):
-            result.append(f"\\cvevent{{\\href{{{certificate['url']}}}{{{certificate['title']}}}}}{{{certificate['issuer']}}}{{{certificate['date']}}}{{}}")
+            result.append(
+                f"\\cvevent{{\\href{{{certificate['url']}}}{{"
+                f"{certificate['title']}}}}}{{{certificate['issuer']}}}{{"
+                f"{certificate['date']}}}{{}}")
         else:
-            result.append(f"\\cvevent{{{certificate['title']}}}{{{certificate['issuer']}}}{{{certificate['date']}}}{{}}")
+            result.append(
+                f"\\cvevent{{{certificate['title']}}}{{"
+                f"{certificate['issuer']}}}{{{certificate['date']}}}{{}}")
         result.append(replace_html(certificate['summary']))
 
         if index < len(configs.resume['certificates']) - 1:
@@ -209,7 +223,7 @@ def education():
     for index, school in enumerate(configs.resume['education']):
         start_date = parse_date(school['startDate'])
         start_date = start_date.strftime("%B %Y").title() if start_date else \
-        school['startDate']
+            school['startDate']
 
         end_date = parse_date(school['endDate'])
         end_date = end_date.strftime("%B %Y").title() if end_date else school[
@@ -217,13 +231,15 @@ def education():
 
         if school.get('website', False):
             result.append(
-                f"\\cvevent{{\\href{{{school['website']}}}{{{school['area'] + ', ' + school['studyType']}}}}}"
+                f"\\cvevent{{\\href{{{school['website']}}}"
+                f"{{{school['area'] + ', ' + school['studyType']}}}}}"
                 f"{{{school['institution']}}}{{"
                 f"{start_date + ' -- ' + end_date}}}{{}}")
         else:
             result.append(
-                f"\\cvevent{{{school['area'] + ', ' + school['studyType']}}}{{{school['institution']}}}{{"
-                f"{start_date + ' -- ' + end_date}}}{{}}")
+                f"\\cvevent{{{school['area'] + ', ' + school['studyType']}}}"
+                f"{{{school['institution']}}}"
+                f"{{{start_date + ' -- ' + end_date}}}{{}}")
 
         if index < len(configs.resume['education']) - 1:
             result.append('\n\\divider\n')
@@ -269,7 +285,9 @@ def language():
     result.append(f"\\cvsection{{{configs.strings['language']}}}")
 
     for index, lang in enumerate(configs.resume['languages']):
-        result.append(f"\\cvskill{{{lang['name']}}}{{{lang['level'] + 1 if lang['level'] > 1 else lang['level']}}}")
+        result.append(
+            f"\\cvskill{{{lang['name']}}}{{"
+            f"{lang['level'] + 1 if lang['level'] > 1 else lang['level']}}}")
 
         if index < len(configs.resume['languages']) - 1:
             result.append('\n\\divider\n')
@@ -382,6 +400,6 @@ if __name__ == '__main__':
     result = []
 
     builder()
+
     with open('result.txt', 'w', encoding='utf-8') as f:
         f.write('\n'.join(result))
-

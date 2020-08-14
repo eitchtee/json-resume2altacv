@@ -401,5 +401,5 @@ if __name__ == '__main__':
 
     builder()
 
-    with open('result.txt', 'w', encoding='utf-8') as f:
+    with open(f'./{configs.language}/main.tex', 'w', encoding='utf-8') as f:
         f.write('\n'.join(result))

@@ -3,6 +3,7 @@ import sys
 import json
 import datetime
 import locale
+from pathlib import Path
 
 
 class Configs:
@@ -401,5 +402,6 @@ if __name__ == '__main__':
 
     builder()
 
-    with open(f'./{configs.language}/main.tex', 'w', encoding='utf-8') as f:
+    result_path = Path(__file__).parent / f"./{configs.language}/main.tex"
+    with result_path.open(mode='w', encoding='utf-8') as f:
         f.write('\n'.join(result))

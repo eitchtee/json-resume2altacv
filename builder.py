@@ -18,6 +18,8 @@ class Configs:
         self.left_composition = data["composition"]["first-column"]
         self.right_composition = data["composition"]["second-column"]
         self.name = data["name"] if data["name"] else None
+        self.ignore_certificates = data["ignore-certificates-of"] if \
+            data["ignore-certificates-of"] else []
         self.strings = data['strings']
 
         self.language = data["language"]
@@ -200,7 +202,10 @@ def technical_skills():
 def certificates():
     result.append(f"\\cvsection{{{configs.strings['certificates']}}}")
 
-    for index, certificate in enumerate(configs.resume['certificates']):
+    certificates_ls = [x for x in configs.resume['certificates'] if
+                       x.get('category') not in configs.ignore_certificates]
+
+    for index, certificate in enumerate(certificates_ls):
         if certificate.get('url', False):
             result.append(
                 f"\\cvevent{{\\href{{{certificate['url']}}}{{"

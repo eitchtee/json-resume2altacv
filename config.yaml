@@ -1,5 +1,5 @@
 # path to your resume.json
-json_resume_path: "resume.json"
+json_resume_path: "bio.json"
 
 # pt or en
 # leave empty to use system
@@ -32,6 +32,8 @@ composition:
     - interests
     - new-page
     - awards
+
+ignore-certificates-of:
 
 strings:
   work: Work Experience

@@ -1,0 +1,15 @@
+\cvsection{\VAR{config.strings['certificates']}}
+
+{% for certificate in config.certificates %}
+{% if certificate.url %}
+\cvevent{\href{\VAR{certificate.url}}{\VAR{certificate.title}}}{\VAR{certificate.issuer}}{\VAR{certificate.date}}{}
+{% else %}
+\cvevent{\VAR{certificate.title}}{\VAR{certificate.issuer}}{\VAR{certificate.date}}{}
+{% endif %}
+\VAR{certificate.summary}
+
+{% if loop.index < config.certificates|length %}
+\divider
+
+{% endif %}
+{% endfor %}

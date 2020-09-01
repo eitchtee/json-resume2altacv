@@ -1,0 +1,9 @@
+\cvsection{\VAR{config.strings['soft-skills']}}
+
+\begin{itemize}
+{% for skill in resume.other_skills %}
+\item {\VAR{skill.name}}
+{% endfor %}
+\end{itemize}
+
+\medskip

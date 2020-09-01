@@ -1,0 +1,15 @@
+\cvsection{\VAR{config.strings['education']}}
+
+{% for school in resume.education %}
+{% if school.website %}
+\cvevent{\href{\VAR{school.website}}{\VAR{school.area}, \VAR{school.studyType}}}{\VAR{school.institution}}{\VAR{school.startDate} -- \VAR{school.endDate}}{}
+{% else %}
+\cvevent{\VAR{school.area}, \VAR{school.studyType}}{\VAR{school.institution}}{\VAR{school.startDate} -- \VAR{school.endDate}}{}
+{% endif %}
+
+{% if loop.index < resume.education|length %}
+\divider
+
+{% endif %}
+{% endfor %}
+\medskip

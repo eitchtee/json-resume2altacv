@@ -1,0 +1,18 @@
+\cvsection{\VAR{config.strings['volunteer']}}
+
+{% for job in resume.volunteer %}
+{% if job.website %}
+\cvevent{\href{\VAR{job.website}}{\VAR{job.position}}}{\VAR{job.organization}}{\VAR{job.startDate} -- \VAR{job.endDate}}{\VAR{job.location}}
+{% else %}
+\cvevent{\VAR{job.position}}{\VAR{job.organization}}{\VAR{job.startDate} -- \VAR{job.endDate}}{\VAR{job.location}}
+{% endif %}
+{% if job.summary %}
+\VAR{job.summary}
+{% endif %}
+
+{% if loop.index < resume.volunteer|length %}
+\divider
+
+{% endif %}
+{% endfor %}
+\medskip

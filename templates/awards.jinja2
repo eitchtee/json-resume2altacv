@@ -1,0 +1,15 @@
+\cvsection{\VAR{config.strings['awards']}}
+
+{% for award in resume.awards %}
+\cvevent{\VAR{award.title}}{\VAR{award.awarder}}{\VAR{award.date}}{}
+{% if award.summary %}
+\VAR{award.summary}
+{% endif %}
+
+{% if loop.index < resume.awards|length %}
+\divider
+{% endif %}
+
+{% endfor %}
+
+\medskip

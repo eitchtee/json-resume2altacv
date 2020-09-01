@@ -1,0 +1,15 @@
+\cvsection{\VAR{config.strings['language']}}
+
+{% for lang in resume.languages %}
+{% if lang.level > 1 %}
+\cvskill{\VAR{lang.name}}{\VAR{lang.level + 1}}
+{% else %}
+\cvskill{\VAR{lang.name}}{\VAR{lang.level}}
+{% endif %}
+
+{% if loop.index < resume.languages|length %}
+\divider
+{% endif %}
+{% endfor %}
+
+\medskip

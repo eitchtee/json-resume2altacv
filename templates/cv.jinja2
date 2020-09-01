@@ -1,0 +1,133 @@
+% If you need to pass whatever options to xcolor
+\PassOptionsToPackage{dvipsnames}{xcolor}
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+
+% Change the page layout if you need to
+\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+
+\usepackage{paracol}
+
+% Change the font if you want to, depending on whether
+% you're using pdflatex or xelatex/lualatex
+\ifxetexorluatex
+    % If using xelatex or lualatex:
+    \setmainfont{Roboto Slab}
+    \setsansfont{Lato}
+    \renewcommand{\familydefault}{\sfdefault}
+\else
+    % If using pdflatex:
+    \usepackage[rm]{roboto}
+    \usepackage[defaultsans]{lato}
+    % \usepackage{sourcesanspro}
+    \renewcommand{\familydefault}{\sfdefault}
+\fi
+
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+{% for color, hex in config.colors.items() %}
+\definecolor{\VAR{color}Color}{HTML}{\VAR{hex}}
+\colorlet{\VAR{color}}{\VAR{color}Color}
+{% endfor %}
+
+\renewcommand{\namefont}{\Huge\rmfamily\bfseries}
+\renewcommand{\personalinfofont}{\small}
+\renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
+\renewcommand{\cvsubsectionfont}{\large\bfseries}
+
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+\begin{document}
+
+{% include 'header.jinja2' %}
+
+{% for section in config.left_composition %}
+{% if section == "new-page" %}
+
+{% include 'new_page.jinja2' %}
+
+{% elif section == "work" %}
+
+{% include 'work.jinja2' %}
+
+{% elif section == "technical-skills" %}
+
+{% include 'technical-skills.jinja2' %}
+
+{% elif section == "certificates" %}
+
+{% include 'certificates.jinja2' %}
+
+{% elif section == "education" %}
+
+{% include 'education.jinja2' %}
+
+{% elif section == "volunteer" %}
+
+{% include 'volunteer.jinja2' %}
+
+{% elif section == "languages" %}
+
+{% include 'languages.jinja2' %}
+
+{% elif section == "soft-skills" %}
+
+{% include 'soft-skills.jinja2' %}
+
+{% elif section == "interests" %}
+
+{% include 'interests.jinja2' %}
+
+{% elif section == "awards" %}
+
+{% include 'awards.jinja2' %}
+
+{% endif %}
+{% endfor %}
+\switchcolumn
+{% for section in config.right_composition %}
+{% if section == "new-page" %}
+
+{% include 'new_page.jinja2' %}
+
+{% elif section == "work" %}
+
+{% include 'work.jinja2' %}
+
+{% elif section == "technical-skills" %}
+
+{% include 'technical-skills.jinja2' %}
+
+{% elif section == "certificates" %}
+
+{% include 'certificates.jinja2' %}
+
+{% elif section == "education" %}
+
+{% include 'education.jinja2' %}
+
+{% elif section == "volunteer" %}
+
+{% include 'volunteer.jinja2' %}
+
+{% elif section == "languages" %}
+
+{% include 'languages.jinja2' %}
+
+{% elif section == "soft-skills" %}
+
+{% include 'soft-skills.jinja2' %}
+
+{% elif section == "interests" %}
+
+{% include 'interests.jinja2' %}
+
+{% elif section == "awards" %}
+
+{% include 'awards.jinja2' %}
+
+{% endif %}
+{% endfor %}
+
+\end{paracol}
+
+\end{document}

@@ -1,0 +1,7 @@
+\cvsection{\VAR{config.strings['interests']}}
+
+{% for interest in resume.interests %}
+\cvtag {\VAR{interest.name.title()}}
+{% endfor %}
+
+\medskip

@@ -1,0 +1,28 @@
+{% if config.name %}
+\name{\VAR{config.name}}
+{% else %}
+\name{\VAR{resume['basics']['name']}}
+{% endif %}
+\tagline{}
+\photoL{2.5cm}{photo}
+\personalinfo{
+  \email{\VAR{resume['basics']['email']}}
+  \phone{\VAR{resume['basics']['phone']}}
+  \location{\VAR{resume['basics']['location']['city']}, \VAR{resume['basics']['location']['region']}, \VAR{resume['basics']['location']['countryCode']}}
+}
+
+\personalinfotwo{
+    \NewInfoField{stackoverflow}{\faStackOverflow}[https://stackoverflow.com/users/3042266/]
+    \NewInfoField{instagram}{\faInstagram}[https://www.instagram.com/]
+    \homepage{\VAR{resume['basics']['website'].replace('https://', '')}}
+{% for profile in resume['basics']['profiles'] %}
+    \\VAR{profile.network.replace(' ', '')}{\VAR{profile.username}}
+{% endfor %}
+}
+
+\makecvheader
+
+\AtBeginEnvironment{itemize}{\small}
+%% Set the left/right column width ratio to 6:4.
+\columnratio{0.6}
+\begin{paracol}{2}

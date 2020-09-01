@@ -1,0 +1,9 @@
+\cvsection{\VAR{config.strings['technical-skills']}}
+
+\begin{itemize}
+{% for skill, skill_list in config.tech_skills.items() %}
+\item \textbf{\VAR{skill}:} \VAR{skill_list}
+{% endfor %}
+\end{itemize}
+
+\medskip

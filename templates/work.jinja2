@@ -1,0 +1,20 @@
+\cvsection{\VAR{config.strings['work']}}
+
+{% for work in resume.work %}
+\cvevent{\VAR{work.position}}{\VAR{work.company}}{\VAR{work.startDate} -- \VAR{work.endDate}}{\VAR{work.location}}
+{% if work.summary %}
+\VAR{work.summary}
+{% endif %}
+{% if work.highlights %}
+\begin{itemize}
+{% for highlight in work.highlights %}
+\item \VAR{highlight}
+{% endfor %}
+\end{itemize}
+{% endif %}
+
+{% if loop.index < resume.work|length %}
+\divider
+
+{% endif %}
+{% endfor %}

@@ -107,7 +107,7 @@ if __name__ == '__main__':
     # load configurations on a global variable
     configs = Configs(config_path)
 
-    file_loader = FileSystemLoader('templates')
+    file_loader = FileSystemLoader(Path(__file__).parent / f"./templates")
     env = Environment(loader=file_loader,
                       variable_start_string='\\VAR{',
                       variable_end_string='}',

@@ -287,6 +287,7 @@
 
 \newcommand{\cvsection}[2][]{%
   \bigskip%
+  \vfil\penalty-9999\vfilneg
   \ifstrequal{#1}{}{}{\marginpar{\vspace*{\dimexpr1pt-\baselineskip}\raggedright\input{#1}}}%
   {\color{heading}\cvsectionfont\MakeUppercase{#2}}\\[-1ex]%
   {\color{headingrule}\rule{\linewidth}{2pt}\par}\medskip

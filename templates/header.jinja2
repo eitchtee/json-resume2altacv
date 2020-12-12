@@ -12,8 +12,6 @@
 }
 
 \personalinfotwo{
-    \NewInfoField{stackoverflow}{\faStackOverflow}[https://stackoverflow.com/users/3042266/]
-    \NewInfoField{instagram}{\faInstagram}[https://www.instagram.com/]
     \homepage{\VAR{resume['basics']['website'].replace('https://', '')}}
 {% for profile in resume['basics']['profiles'] %}
     \\VAR{profile.network.replace(' ', '')}{\VAR{profile.username}}

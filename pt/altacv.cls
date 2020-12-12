@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%
-% This is altacv.cls (v1.3.2, 17 May 2020) written by
+% This is altacv.cls (v1.3.3, 31 October 2020) written by
 % LianTze Lim (liantze@gmail.com).
 %
 %% It may be distributed and/or modified under the
@@ -18,7 +18,7 @@
 
 %%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{altacv}[2020/05/17 AltaCV v1.3.2, yet another alternative class for a resume/curriculum vitae.]
+\ProvidesClass{altacv}[2020/05/17 AltaCV v1.3.3, yet another alternative class for a resume/curriculum vitae.]
 
 %% v1.1: Optionally load academicons
 \newif\if@academicons
@@ -38,6 +38,11 @@
 %% v1.3.2 Hopefully this helps make the PDF
 %% file more 'friendly' with copy-paste etc
 \RequirePackage[a-1b]{pdfx}
+%% v1.3.3 Temporary fix for pdfx and biblatex incompatibility
+%% (Thanks to @badetitou for highlighting this issue)
+%% https://github.com/plk/biblatex/issues/1044
+%% Will be removed when fix is released in biblatex 3.16
+\catcode30=12
 \RequirePackage[margin=2cm]{geometry}
 \RequirePackage[fixed]{fontawesome5}
 \RequirePackage{ifxetex,ifluatex}
@@ -216,8 +221,10 @@
 \NewInfoField{twitter}{\faTwitter}[https://twitter.com/]
 \NewInfoField{linkedin}{\faLinkedin}[https://linkedin.com/in/]
 \NewInfoField{github}{\faGithub}[https://github.com/]
-\NewInfoField{orcid}{\aiOrcid}[https://orcid.com/]
+\NewInfoField{orcid}{\aiOrcid}[https://orcid.org/]
 \NewInfoField{location}{\faMapMarker}
+\NewInfoField{stackoverflow}{\faStackOverflow}[https://stackoverflow.com/users/3042266/]
+\NewInfoField{instagram}{\faInstagram}[https://www.instagram.com/]
 
 % v1.2: Support for multiple photos
 \newlength{\altacv@photos@width}
@@ -395,15 +402,15 @@
 
 \newenvironment{cvcolumn}[1]{\begin{minipage}[t]{#1}\raggedright}{\end{minipage}}
 
-%\RequirePackage[backend=biber,style=authoryear,sorting=ydnt]{biblatex}
+\RequirePackage[backend=biber,style=authoryear,sorting=ydnt]{biblatex}
 %% For removing numbering entirely when using a numeric style
 % \setlength{\bibhang}{1em}
 % \DeclareFieldFormat{labelnumberwidth}{\makebox[\bibhang][l]{\itemmarker}}
 % \setlength{\biblabelsep}{0pt}
-%\defbibheading{pubtype}{\cvsubsection{#1}}
-%\renewcommand{\bibsetup}{\vspace*{-\baselineskip}}
-%\AtEveryBibitem{\makebox[\bibhang][l]{\itemmarker}}
-%\setlength{\bibitemsep}{0.25\baselineskip}
+\defbibheading{pubtype}{\cvsubsection{#1}}
+\renewcommand{\bibsetup}{\vspace*{-\baselineskip}}
+\AtEveryBibitem{\makebox[\bibhang][l]{\itemmarker}}
+\setlength{\bibitemsep}{0.25\baselineskip}
 
 % v1.1.2: make it easier to add a sidebar aligned with top of next page
 \RequirePackage{afterpage}

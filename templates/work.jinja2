@@ -1,7 +1,7 @@
 \cvsection{\VAR{config.strings['work']}}
 
 {% for work in resume.work %}
-\cvevent{\VAR{work.position}}{\VAR{work.company}}{\VAR{work.startDate} -- \VAR{work.endDate}}{\VAR{work.location}}
+\cvevent{\VAR{work.position}}{\VAR{work.name}}{\VAR{work.startDate} -- \VAR{work.endDate}}{\VAR{work.location}}
 {% if work.summary %}
 \VAR{work.summary}
 {% endif %}

@@ -120,4 +120,5 @@ if __name__ == '__main__':
 
     result_path = Path(__file__).parent / f"./{configs.language}/main.tex"
     with result_path.open(mode='w', encoding='utf-8') as f:
+        print(output)
         f.write(output)
